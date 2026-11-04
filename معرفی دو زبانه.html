@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Amir Rahbari — Visual Identity</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@33.003/Vazirmatn-font-face.css" rel="stylesheet">
+
+<script>
+(function(){
+  let saved = null;
+  try { saved = localStorage.getItem('preferred-lang'); } catch(e) {}
+  const bLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+  const isFa = saved ? saved === 'fa' : bLang.startsWith('fa');
+  const LANG = isFa ? 'fa' : 'en';
+  window.__LANG = LANG;
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = LANG === 'fa' ? 'rtl' : 'ltr';
+})();
+</script>
+
+<style>
+  @font-face {
+    font-family: 'Doran';
+    src: local('Doran'), local('Doran-Regular'), local('Doran Regular'),
+         url('https://cdn.jsdelivr.net/gh/aminabbasi/doran/dist/Doran-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  :root{
+    --canvas:        #FAF9F5;
+    --ink:           #141413;
+    --muted:         #73726C;
+    --brand:         #D97757;
+    --brand-deep:    #C6613F;
+    --brand-tint:    #E3DACC;
+    --out-bubble:    #E8E6DC;
+    --in-bubble:     #F0EEE6;
+    --hairline:      rgba(20,20,19,.08);
+    --fa-body:       'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
+    --fa-title:      'Doran', 'Amiri', 'Noto Naskh Arabic', serif;
+    --en-serif:      'Bodoni Moda', serif;
+    --en-sans:       'Inter', ui-sans-serif, sans-serif;
+    --body-font:     var(--en-sans);
+    --title-font:    var(--en-serif);
+    --text-dir:      ltr;
+    --text-align:    left;
+  }
+
+  html[lang="fa"] {
+    --body-font:   var(--fa-body);
+    --title-font:  var(--fa-title);
+    --text-dir:    rtl;
+    --text-align:  right;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  
+  body{
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--body-font);
+    direction: var(--text-dir);
+    -webkit-font-smoothing:antialiased;
+    overflow-x: hidden;
+  }
+
+  .en-em {
+    font-family: var(--en-serif);
+    font-style: italic;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  .scroll-container { height: 1100vh; position: relative; }
+  .sticky-viewport { position: sticky; top: 0; width: 100vw; height: 100dvh; overflow: hidden; }
+  .camera { position: absolute; inset: 0; width: 100vw; height: 100dvh; overflow: hidden; }
+
+  .world {
+    position: absolute; top: 0; left: 0;
+    width: 300vw; height: 300dvh;
+    display: grid;
+    grid-template-columns: repeat(3, 100vw);
+    grid-template-rows: repeat(3, 100dvh);
+  }
+
+  .scene{
+    width: 100vw; height: 100dvh;
+    display: grid; place-items: center;
+    position: relative; padding: 20px; overflow: hidden;
+  }
+
+  .scene-process    { grid-column: 2; grid-row: 1; }
+  .scene-colors     { grid-column: 3; grid-row: 1; }
+  .scene-philosophy { grid-column: 1; grid-row: 2; }
+  .scene-works      { grid-column: 2; grid-row: 2; }
+  .scene-promo      { grid-column: 3; grid-row: 2; }
+  .scene-chat       { grid-column: 1; grid-row: 3; }
+  .scene-logo       { grid-column: 2; grid-row: 3; }
+
+  .glow{
+    position: absolute; inset: 0; margin: auto;
+    width: min(78vmin, 760px); height: min(78vmin, 760px);
+    background: radial-gradient(circle at 50% 45%, rgba(217,119,87,.16) 0%, rgba(217,119,87,.05) 45%, rgba(217,119,87,0) 72%);
+    border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+    filter: blur(8px); z-index: 0; pointer-events: none;
+  }
+
+  .logo-lockup {
+    position: relative;
+    display: flex; flex-direction: column; align-items: flex-start;
+    transform: scale(clamp(0.4, 3.5vw, 1));
+    direction: ltr;
+  }
+  .amir-row { position: relative; display: flex; align-items: flex-start; gap: clamp(8px, 2vw, 20px); }
+  .brand-circle {
+    position: absolute; width: clamp(50px, 12vw, 120px); height: clamp(50px, 12vw, 120px);
+    background: var(--brand); border-radius: 50%; top: -6%; left: 0; z-index: -1;
+  }
+  .amir-text, .rahbari-text {
+    font-family: var(--en-serif); font-size: clamp(3rem, 15vw, 130px);
+    line-height: 0.85; font-weight: 400; letter-spacing: 0.02em; color: var(--ink);
+    display: flex;
+  }
+  .amir-text span, .rahbari-text span { display: inline-block; }
+  .subtext-block { display: flex; flex-direction: column; margin-top: clamp(5px, 1.5vw, 15px); margin-left: clamp(4px, 1vw, 10px); }
+  .designer-text {
+    font-family: var(--en-serif); font-style: italic;
+    font-size: clamp(0.8rem, 2.5vw, 22px); color: var(--brand); margin-bottom: 2px;
+  }
+  .visual-identity-text {
+    font-family: var(--en-sans); font-weight: 400;
+    font-size: clamp(0.5rem, 1.2vw, 14px); letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--brand);
+  }
+  .rahbari-text { margin-top: clamp(4px, 1vw, 10px); }
+
+  .chat{
+    position: relative;
+    width: min(560px, 92vw); height: min(380px, 70dvh);
+    background: var(--canvas); border: 1px solid var(--hairline); border-radius: 24px;
+    box-shadow: 0 30px 70px -30px rgba(20,20,19,.20), 0 2px 8px rgba(217,119,87,.05);
+    display: flex; flex-direction: column; z-index: 2;
+  }
+  .chat-head{
+    display: flex; align-items: center; gap: clamp(6px, 2vw, 9px);
+    height: clamp(44px, 10vw, 52px); padding: 0 clamp(12px, 3vw, 18px);
+    border-bottom: 1px solid var(--hairline); flex-shrink: 0;
+  }
+  .avatar-dot{
+    flex-shrink: 0; width: clamp(20px, 5vw, 24px); height: clamp(20px, 5vw, 24px);
+    border-radius: 50%; background: var(--brand); display: grid; place-items: center;
+    font-family: var(--en-serif); font-size: clamp(10px, 3vw, 14px); color: #fff; font-style: italic;
+    box-shadow: 0 0 0 3px rgba(217,119,87,.14);
+    direction: ltr;
+  }
+  .chat-title{
+    font-family: var(--body-font);
+    font-size: clamp(13px, 3.5vw, 15px); font-weight: 700; color: var(--ink);
+    direction: var(--text-dir);
+  }
+  .chat-model{
+    margin-inline-start: auto; padding: 3px 8px; border-radius: 999px;
+    background: var(--brand-tint);
+    font-family: var(--body-font);
+    font-size: clamp(8px, 2vw, 10px); font-weight: 600;
+    color: var(--brand-deep);
+    flex-shrink: 0;
+  }
+  .messages{ position: relative; flex: 1; overflow: hidden; padding: clamp(10px, 3vw, 16px) clamp(12px, 3vw, 18px); }
+  .bubble{
+    font-size: clamp(11px, 3vw, 14px); line-height: 1.55;
+    padding: clamp(8px, 2vw, 10px) clamp(10px, 2.5vw, 14px); color: var(--ink);
+    font-family: var(--body-font);
+    direction: var(--text-dir);
+    text-align: var(--text-align);
+  }
+  .bubble.user{
+    position: absolute; right: clamp(12px, 3vw, 18px); bottom: clamp(12px, 3vw, 18px);
+    background: var(--out-bubble); border-radius: 16px 16px 6px 16px; max-width: 75%;
+  }
+  .bubble.assistant{
+    position: absolute; left: clamp(12px, 3vw, 18px); bottom: clamp(12px, 3vw, 18px);
+    background: var(--in-bubble); border: 1px solid rgba(217,119,87,.10);
+    border-radius: 16px 16px 16px 6px; max-width: 85%;
+  }
+  .typing-dots{
+    position: absolute; top: clamp(8px, 2vw, 12px);
+    inset-inline-start: clamp(10px, 2.5vw, 14px);
+    display: flex; gap: 4px;
+    direction: ltr;
+  }
+  .typing-dots i{ width: 5px; height: 5px; border-radius: 50%; background: var(--brand); animation: dotPulse 1.2s infinite; }
+  .typing-dots i:nth-child(2){ animation-delay: .2s; }
+  .typing-dots i:nth-child(3){ animation-delay: .4s; }
+  @keyframes dotPulse { 0%, 100% { opacity: .3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+  .response-text{ display: inline-block; }
+
+  .composer{ padding: 0 clamp(10px, 2.5vw, 14px) clamp(10px, 2.5vw, 14px); flex-shrink: 0; }
+  .pill{
+    display: flex; align-items: center; gap: clamp(6px, 2vw, 10px);
+    padding: clamp(6px, 1.5vw, 8px) clamp(6px, 1.5vw, 8px) clamp(6px, 1.5vw, 8px) clamp(10px, 2.5vw, 14px);
+    background: #FFFFFF; border: 1px solid var(--hairline); border-radius: 20px;
+    box-shadow: 0 1px 2px rgba(20,20,19,.04); flex-wrap: nowrap;
+    direction: var(--text-dir);
+  }
+  .plus{ color: var(--muted); font-size: clamp(14px, 4vw, 18px); flex-shrink: 0; }
+  .field{
+    position: relative; flex: 1; min-width: 0;
+    height: clamp(16px, 4vw, 20px); line-height: clamp(16px, 4vw, 20px);
+    font-size: clamp(11px, 3vw, 14px); overflow: hidden;
+    font-family: var(--body-font);
+    direction: var(--text-dir);
+  }
+  .ph{ position: absolute; color: var(--muted); white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; inset-inline-start: 0; }
+  .typed{ display: inline-block; color: var(--ink); white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 100%; }
+  .send{
+    position: relative; flex-shrink: 0;
+    width: clamp(36px, 9vw, 40px); height: clamp(36px, 9vw, 40px);
+    aspect-ratio: 1 / 1; border: 0; border-radius: 50%; padding: 0;
+    background: var(--brand); display: grid; place-items: center;
+    box-shadow: 0 4px 14px -2px rgba(217,119,87,.60);
+    transition: transform 0.1s ease; touch-action: manipulation;
+  }
+  .send svg { width: clamp(14px, 4vw, 18px); height: clamp(14px, 4vw, 18px); }
+
+  .click-hint {
+    position: absolute; bottom: 78px; left: 0; right: 0; margin: 0 auto;
+    width: fit-content; max-width: calc(100% - 24px);
+    background: var(--ink); color: var(--canvas);
+    padding: 11px 20px; border-radius: 999px;
+    font-family: var(--body-font);
+    font-size: clamp(12px, 3.4vw, 13px); font-weight: 600;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; z-index: 10;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.28); white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
+    direction: var(--text-dir);
+  }
+  .click-hint .hint-icon {
+    display: inline-grid; place-items: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--brand); font-size: 11px; flex-shrink: 0;
+    direction: ltr;
+  }
+  .click-hint.active { opacity: 1; animation: hintFloat 1.8s ease-in-out infinite; }
+  @keyframes hintFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .send.pulsing { animation: btnPulse 1.5s infinite; cursor: pointer; }
+  @keyframes btnPulse {
+    0% { box-shadow: 0 0 0 0 rgba(217,119,87, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(217,119,87, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(217,119,87, 0); }
+  }
+
+  .philosophy { position: relative; z-index: 2; max-width: 780px; padding: 0 6vw; text-align: center; }
+  .philosophy .quote-mark {
+    font-family: var(--en-serif); font-size: clamp(4rem, 10vw, 6rem);
+    line-height: 0.6; color: var(--brand); opacity: 0.35;
+    margin-bottom: clamp(8px, 2vw, 16px); display: block;
+    direction: ltr;
+  }
+  .philosophy blockquote {
+    font-family: var(--body-font);
+    direction: var(--text-dir);
+    font-size: clamp(1.5rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.45; letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  html[lang="en"] .philosophy blockquote {
+    font-family: var(--en-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.6rem, 4.5vw, 3.2rem);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .philosophy blockquote em { font-style: normal; color: var(--brand); font-weight: 500; }
+  .philosophy blockquote .en-em {
+    display: block;
+    margin-top: clamp(8px, 1.5vw, 14px);
+    font-family: var(--en-serif);
+    font-style: italic; font-weight: 400;
+    font-size: clamp(1.1rem, 2.8vw, 1.9rem);
+    color: var(--muted);
+    direction: ltr;
+    text-align: center;
+  }
+  .philosophy .attribution {
+    margin-top: clamp(16px, 4vw, 28px);
+    font-family: var(--body-font);
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    color: var(--muted); font-weight: 500;
+    direction: var(--text-dir);
+  }
+  .philosophy .attribution::before { content: '— '; color: var(--brand); }
+
+  .works { position: relative; z-index: 2; width: 100%; max-width: 540px; padding: 0 4vw; }
+  .works-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: clamp(12px, 2.5vh, 20px);
+    direction: var(--text-dir);
+  }
+  .works-title {
+    font-family: var(--title-font);
+    font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+    font-weight: 700; color: var(--ink); letter-spacing: 0;
+    line-height: 1.2;
+  }
+  html[lang="en"] .works-title { font-weight: 400; letter-spacing: -0.01em; }
+  .works-title em { font-style: italic; color: var(--brand); }
+  html[lang="fa"] .works-title em { font-style: normal; font-weight: 700; }
+  .works-count {
+    font-family: var(--body-font);
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+    color: var(--muted); font-weight: 600;
+  }
+  html[lang="fa"] .works-count { letter-spacing: 0; }
+  html[lang="en"] .works-count { letter-spacing: 0.15em; text-transform: uppercase; font-size: clamp(0.6rem, 1.4vw, 0.75rem); }
+  .steps-container {
+    display: flex; flex-direction: column;
+    gap: clamp(5px, 1vh, 8px);
+    width: 100%;
+    direction: var(--text-dir);
+  }
+  .step-card {
+    display: flex; align-items: center;
+    gap: clamp(10px, 2vw, 16px);
+    padding: clamp(7px, 1.3vh, 11px) clamp(14px, 2.5vw, 18px);
+    background: rgba(255,255,255,.6);
+    border: 1px solid var(--hairline);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(20,20,19,.03);
+    will-change: transform, opacity;
+  }
+  .step-card .num {
+    font-family: var(--en-serif);
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--brand); font-weight: 500;
+    flex-shrink: 0; min-width: 24px;
+    direction: ltr; text-align: center;
+  }
+  .step-card .title {
+    font-family: var(--body-font);
+    font-size: clamp(0.78rem, 1.7vw, 0.9rem);
+    font-weight: 600; color: var(--ink); line-height: 1.35;
+    direction: var(--text-dir); text-align: var(--text-align);
+  }
+
+  .process { position: relative; z-index: 2; width: 100%; max-width: 860px; padding: 0 5vw; }
+  .process-head { text-align: center; margin-bottom: clamp(24px, 5vw, 40px); direction: var(--text-dir); }
+  .process-title {
+    font-family: var(--title-font);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 700; color: var(--ink); letter-spacing: 0; line-height: 1.25;
+  }
+  html[lang="en"] .process-title { font-weight: 400; letter-spacing: -0.01em; }
+  .process-title em { font-style: italic; color: var(--brand); }
+  html[lang="fa"] .process-title em { font-style: normal; font-weight: 700; }
+  .process-steps { display: flex; flex-direction: column; gap: clamp(14px, 3vw, 20px); direction: var(--text-dir); }
+  .step {
+    display: flex; align-items: baseline; gap: clamp(12px, 3vw, 24px);
+    padding: clamp(12px, 2.5vw, 18px) clamp(14px, 3vw, 24px);
+    background: rgba(255,255,255,.55);
+    border: 1px solid var(--hairline);
+    border-radius: 16px;
+    backdrop-filter: blur(4px);
+    direction: var(--text-dir);
+  }
+  .step-num {
+    font-family: var(--en-serif);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 400; color: var(--brand);
+    line-height: 1; flex-shrink: 0; direction: ltr;
+  }
+  .step-body { display: flex; flex-direction: column; gap: 4px; text-align: var(--text-align); }
+  .step-name {
+    font-family: var(--en-serif);
+    font-style: italic; font-weight: 500;
+    font-size: clamp(1rem, 2.4vw, 1.3rem);
+    color: var(--ink); letter-spacing: -0.01em;
+    direction: ltr;
+    text-align: var(--text-align);
+  }
+  .step-desc {
+    font-family: var(--body-font);
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+    color: var(--muted); line-height: 1.5;
+    direction: var(--text-dir);
+  }
+
+  .colors { position: relative; z-index: 2; width: 100%; max-width: 820px; padding: 0 5vw; }
+  .colors-head { text-align: center; margin-bottom: clamp(20px, 4vw, 32px); direction: var(--text-dir); }
+  .colors-title {
+    font-family: var(--title-font);
+    font-size: clamp(1.7rem, 4vw, 2.6rem);
+    font-weight: 700; color: var(--ink); letter-spacing: 0; line-height: 1.25;
+  }
+  html[lang="en"] .colors-title { font-weight: 400; letter-spacing: -0.01em; }
+  .colors-title em { font-style: italic; color: var(--brand); }
+  html[lang="fa"] .colors-title em { font-style: normal; font-weight: 700; }
+  .palette { display: flex; gap: clamp(8px, 2vw, 14px); justify-content: center; flex-wrap: wrap; margin-bottom: clamp(20px, 4vw, 32px); }
+  .swatch {
+    width: clamp(60px, 14vw, 100px); height: clamp(80px, 18vw, 130px);
+    border-radius: 14px; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: clamp(8px, 1.5vw, 12px);
+    box-shadow: 0 8px 24px -12px rgba(20,20,19,.25);
+    flex-shrink: 0; direction: ltr; text-align: left;
+  }
+  .swatch .sw-name { font-family: var(--en-sans); font-size: clamp(0.5rem, 1.2vw, 0.65rem); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9; }
+  .swatch .sw-hex { font-family: var(--en-sans); font-size: clamp(0.5rem, 1.2vw, 0.65rem); letter-spacing: 0.06em; opacity: 0.7; margin-top: 2px; }
+  .swatch.ivory { background: #FAF9F5; border: 1px solid var(--hairline); color: var(--ink); }
+  .swatch.slate { background: #141413; color: #FAF9F5; }
+  .swatch.clay  { background: #D97757; color: #FFFFFF; }
+  .swatch.oat   { background: #E3DACC; color: var(--ink); }
+  .swatch.sky   { background: #6A9BCC; color: #FFFFFF; }
+  .swatch.olive { background: #788C5D; color: #FFFFFF; }
+  .type-pair { display: flex; gap: clamp(16px, 4vw, 40px); justify-content: center; align-items: flex-end; flex-wrap: wrap; }
+  .type-specimen { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .type-specimen .specimen-aa { font-size: clamp(2.5rem, 7vw, 4rem); line-height: 1; color: var(--ink); }
+  .type-specimen .specimen-aa.serif { font-family: var(--en-serif); font-weight: 400; }
+  .type-specimen .specimen-aa.sans { font-family: var(--en-sans); font-weight: 400; }
+  .type-specimen .specimen-meta { font-family: var(--en-sans); font-size: clamp(0.6rem, 1.4vw, 0.75rem); letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .type-divider { width: 1px; height: clamp(40px, 8vw, 64px); background: var(--hairline); align-self: center; }
+
+  .scene-promo::before{
+    content: ''; position: absolute; top: 50%; left: 50%;
+    width: 80vmin; height: 80vmin; transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(217,119,87,0.12) 0%, rgba(217,119,87,0.03) 45%, transparent 72%);
+    border-radius: 50%; filter: blur(16px); pointer-events: none; z-index: 0;
+  }
+  .promo{
+    position: relative; z-index: 2; display: flex; flex-direction: column;
+    align-items: center; text-align: center; padding: 0 6vw; max-width: 900px;
+    direction: var(--text-dir);
+  }
+  .promo-mark{
+    width: clamp(34px, 8vw, 46px); height: clamp(34px, 8vw, 46px);
+    border-radius: 50%; background: var(--brand); display: grid; place-items: center;
+    margin-bottom: clamp(14px, 4vw, 22px);
+    box-shadow: 0 8px 24px -6px rgba(217,119,87,.60);
+    font-family: var(--en-serif); font-size: clamp(18px, 5vw, 24px); color: #fff; font-style: italic;
+    flex-shrink: 0; direction: ltr;
+  }
+  .promo-kicker{
+    font-family: var(--body-font);
+    font-size: clamp(12px, 2.6vw, 14px); font-weight: 600;
+    color: var(--brand); margin-bottom: clamp(14px, 4vw, 22px);
+    direction: var(--text-dir);
+  }
+  html[lang="en"] .promo-kicker { letter-spacing: .42em; text-indent: .42em; text-transform: uppercase; font-weight: 500; }
+  .promo-headline{
+    font-family: var(--en-serif); font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+    font-weight: 400; line-height: 1.15; letter-spacing: -.02em; color: var(--ink);
+    margin-bottom: clamp(18px, 4vw, 24px);
+    direction: ltr;
+  }
+  .promo-headline em{ font-style: italic; color: var(--brand); font-weight: 500; }
+  .promo-sub{
+    font-family: var(--body-font);
+    font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 400; line-height: 1.65;
+    color: var(--muted); max-width: 42ch; margin-bottom: clamp(20px, 5vw, 32px);
+    direction: var(--text-dir);
+  }
+  .promo-cta{
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px);
+    background: var(--brand); color: #FFFFFF; text-decoration: none;
+    font-family: var(--body-font);
+    font-size: clamp(14px, 2vw, 16px); font-weight: 600; border-radius: 999px;
+    box-shadow: 0 14px 36px -10px rgba(217,119,87,.60);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    direction: var(--text-dir);
+  }
+  .promo-cta:active { transform: scale(0.96); }
+  .cta-arrow { transition: transform .2s; display: inline-block; }
+  html[lang="en"] .cta-arrow::before { content: '→'; }
+  html[lang="fa"] .cta-arrow::before { content: '←'; }
+  html[lang="en"] .promo-cta:hover .cta-arrow { transform: translateX(3px); }
+  html[lang="fa"] .promo-cta:hover .cta-arrow { transform: translateX(-3px); }
+
+  .grain{
+    position: absolute; inset: 0; z-index: 20; pointer-events: none; opacity: .04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .scroll-hint {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    z-index: 100; display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-family: var(--body-font);
+    font-size: 12px; color: var(--muted);
+    transition: opacity 0.5s ease; pointer-events: none;
+    direction: var(--text-dir);
+  }
+  .scroll-hint svg { animation: bounce 2s infinite; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 200;
+    display: flex;
+    gap: 2px;
+    background: rgba(250,249,245,.85);
+    border-radius: 999px;
+    padding: 3px;
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 4px 14px rgba(20,20,19,.06);
+  }
+  .lang-btn {
+    background: transparent;
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .2s ease;
+    direction: ltr;
+  }
+  .lang-btn.active {
+    background: var(--ink);
+    color: var(--canvas);
+  }
+  .lang-btn:hover:not(.active) {
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+  <div class="lang-toggle" id="langToggle">
+    <button class="lang-btn" data-lang="en" type="button">EN</button>
+    <button class="lang-btn" data-lang="fa" type="button">FA</button>
+  </div>
+
+  <div class="scroll-hint" id="scrollHint">
+    <span data-en="Scroll to explore" data-fa="اسکرول کنید"></span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M19 12l-7 7-7-7"/>
+    </svg>
+  </div>
+
+  <div class="scroll-container">
+    <div class="sticky-viewport" id="stickyViewport">
+      <div class="camera">
+        <div class="glow" aria-hidden="true"></div>
+
+        <div class="world" id="world">
+
+          <section class="scene scene-process">
+            <div class="process">
+              <div class="process-head">
+                <h3 class="process-title" data-en="The journey &lt;em&gt;at a glance&lt;/em&gt;" data-fa="مسیر در یک &lt;em&gt;نگاه&lt;/em&gt;"></h3>
+              </div>
+              <div class="process-steps">
+                <div class="step">
+                  <span class="step-num">01</span>
+                  <div class="step-body">
+                    <span class="step-name">Discover</span>
+                    <span class="step-desc" data-en="Brief · Research · Brand positioning" data-fa="بریف · تحقیق · جایگاه برند"></span>
+                  </div>
+                </div>
+                <div class="step">
+                  <span class="step-num">02</span>
+                  <div class="step-body">
+                    <span class="step-name">Design</span>
+                    <span class="step-desc" data-en="Logo · Palette · Typography · Mockups" data-fa="لوگو · پالت · تایپوگرافی · نمونه‌سازی"></span>
+                  </div>
+                </div>
+                <div class="step">
+                  <span class="step-num">03</span>
+                  <div class="step-body">
+                    <span class="step-name">Deliver</span>
+                    <span class="step-desc" data-en="Guidelines · Post-delivery follow-up" data-fa="راهنما · پیگیری پس از تحویل"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-colors">
+            <div class="colors">
+              <div class="colors-head">
+                <h3 class="colors-title" data-en="Color &amp; &lt;em&gt;type&lt;/em&gt;" data-fa="رنگ و &lt;em&gt;تایپوگرافی&lt;/em&gt;"></h3>
+              </div>
+              <div class="palette">
+                <div class="swatch ivory"><span class="sw-name">Ivory</span><span class="sw-hex">#FAF9F5</span></div>
+                <div class="swatch slate"><span class="sw-name">Slate</span><span class="sw-hex">#141413</span></div>
+                <div class="swatch clay"><span class="sw-name">Clay</span><span class="sw-hex">#D97757</span></div>
+                <div class="swatch oat"><span class="sw-name">Oat</span><span class="sw-hex">#E3DACC</span></div>
+                <div class="swatch sky"><span class="sw-name">Sky</span><span class="sw-hex">#6A9BCC</span></div>
+                <div class="swatch olive"><span class="sw-name">Olive</span><span class="sw-hex">#788C5D</span></div>
+              </div>
+              <div class="type-pair">
+                <div class="type-specimen">
+                  <span class="specimen-aa serif">Aa</span>
+                  <span class="specimen-meta">Bodoni Moda</span>
+                </div>
+                <div class="type-divider"></div>
+                <div class="type-specimen">
+                  <span class="specimen-aa sans">Aa</span>
+                  <span class="specimen-meta">Inter</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-philosophy">
+            <div class="philosophy">
+              <span class="quote-mark">“</span>
+              <blockquote id="quoteText"
+                data-en="A brand is like a person —&lt;br /&gt;it has an &lt;em&gt;identity&lt;/em&gt;, a &lt;em&gt;face&lt;/em&gt;,&lt;br /&gt;and a &lt;em&gt;value&lt;/em&gt;."
+                data-fa="برند مثل یک انسان است —&lt;br /&gt;&lt;span class=&quot;en-em&quot;&gt;it has an identity, a face, and a value.&lt;/span&gt;"></blockquote>
+              <p class="attribution" data-en="Amir Rahbari" data-fa="امیر رهبری"></p>
+            </div>
+          </section>
+
+          <section class="scene scene-works">
+            <div class="works">
+              <div class="works-head">
+                <h3 class="works-title" data-en="How I &lt;em&gt;work&lt;/em&gt;" data-fa="روش کار &lt;em&gt;من&lt;/em&gt;"></h3>
+                <span class="works-count" data-en="09 Steps" data-fa="۰۹ گام"></span>
+              </div>
+              <div class="steps-container">
+                <div class="step-card"><span class="num">01</span><span class="title" data-en="Taking the brief" data-fa="گرفتن بریف"></span></div>
+                <div class="step-card"><span class="num">02</span><span class="title" data-en="Research" data-fa="تحقیق"></span></div>
+                <div class="step-card"><span class="num">03</span><span class="title" data-en="Defining brand positioning" data-fa="تعیین جایگاه برند"></span></div>
+                <div class="step-card"><span class="num">04</span><span class="title" data-en="Logo design (if needed)" data-fa="طراحی لوگو (در صورت نیاز)"></span></div>
+                <div class="step-card"><span class="num">05</span><span class="title" data-en="Designing the color palette" data-fa="طراحی پالت رنگی"></span></div>
+                <div class="step-card"><span class="num">06</span><span class="title" data-en="Typography" data-fa="تایپوگرافی"></span></div>
+                <div class="step-card"><span class="num">07</span><span class="title" data-en="Mockups" data-fa="نمونه‌گیری"></span></div>
+                <div class="step-card"><span class="num">08</span><span class="title" data-en="Visual identity guidelines" data-fa="راهنمای استفاده از هویت بصری"></span></div>
+                <div class="step-card"><span class="num">09</span><span class="title" data-en="Full follow-up after delivery" data-fa="پیگیری کامل پس از تحویل"></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-chat">
+            <div class="chat">
+              <header class="chat-head">
+                <span class="avatar-dot">A</span>
+                <span class="chat-title" data-en="Amir Rahbari" data-fa="امیر رهبری"></span>
+                <span class="chat-model" data-en="Designer" data-fa="طراح"></span>
+              </header>
+              <div class="messages">
+                <div class="bubble user" id="userBubble"
+                  data-en="Hi Amir, are you accepting new brand projects?"
+                  data-fa="سلام امیر، پروژه جدید برندینگ قبول می‌کنی؟"></div>
+                <div class="bubble assistant" id="assistantBubble">
+                  <span class="typing-dots" id="typingDots"><i></i><i></i><i></i></span>
+                  <span class="response-text" id="responseText"
+                    data-en="Yes — I'm welcoming new clients. I craft identities that feel timeless, purposeful, and unmistakably yours."
+                    data-fa="بله — پذیرای مشتریان جدید هستم. هویت‌هایی می‌سازم که حس ماندگاری، هدفمندی و منحصر بودن داشته باشند."></span>
+                </div>
+              </div>
+              <div class="composer">
+                <div class="pill">
+                  <span class="plus">+</span>
+                  <div class="field">
+                    <span class="ph" id="placeholder" data-en="Message Amir…" data-fa="پیام به امیر…"></span>
+                    <span class="typed" id="typedText"
+                      data-en="Hi Amir, are you accepting new brand projects?"
+                      data-fa="سلام امیر، پروژه جدید برندینگ قبول می‌کنی؟"></span>
+                  </div>
+                  <button class="send" id="sendBtn">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="click-hint" id="clickHint">
+                <span class="hint-icon">✉</span>
+                <span data-en="Press Send to continue" data-fa="برای ادامه، پیام را ارسال کنید"></span>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-logo">
+            <div class="logo-lockup">
+              <div class="amir-row">
+                <div class="brand-circle" id="brandCircle"></div>
+                <div class="amir-text" id="amirText">
+                  <span>A</span><span>M</span><span>I</span><span>R</span>
+                </div>
+                <div class="subtext-block" id="subtextBlock">
+                  <div class="designer-text">Designer</div>
+                  <div class="visual-identity-text">VISUAL IDENTITY</div>
+                </div>
+              </div>
+              <div class="rahbari-text" id="rahbariText">
+                <span>R</span><span>A</span><span>H</span><span>B</span><span>A</span><span>R</span><span>I</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene scene-promo">
+            <div class="promo">
+              <div class="promo-mark">A</div>
+              <p class="promo-kicker" data-en="Amir Rahbari" data-fa="امیر رهبری"></p>
+              <h2 class="promo-headline">Crafting brands<br />with <em>purpose.</em></h2>
+              <p class="promo-sub"
+                data-en="Visual identity design that speaks clearly and lasts."
+                data-fa="طراحی هویت بصری که شفاف صحبت می‌کند و ماندگار است."></p>
+              <a class="promo-cta" href="https://rokhstudiopackaging-commits.github.io/AmirRahbariPortfolio/" target="_blank">
+                <span data-en="View Portfolio" data-fa="مشاهده پورتفولیو"></span>
+                <span class="cta-arrow"></span>
+              </a>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <div class="grain"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const LANG = window.__LANG;
+    const IS_RTL = LANG === 'fa';
+
+    (function applyI18n(){
+      document.querySelectorAll('[data-en], [data-fa]').forEach(el => {
+        const content = el.getAttribute('data-' + LANG);
+        if (content !== null) el.innerHTML = content;
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === LANG);
+      });
+    })();
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetLang = btn.getAttribute('data-lang');
+        if (targetLang === LANG) return;
+        try { localStorage.setItem('preferred-lang', targetLang); } catch(err) {}
+        location.reload();
+      });
+    });
+
+    /* ===== AUDIO ===== */
+    let audioCtx = null, masterGain = null, reverbNode = null;
+    let audioEnabled = false, ambientStarted = false;
+
+    function initAudio() {
+      if (audioEnabled) return;
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      audioCtx = new AC();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.8;
+
+      const length = audioCtx.sampleRate * 1.5;
+      const impulse = audioCtx.createBuffer(2, length, audioCtx.sampleRate);
+      for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < length; j++) {
+          impulse.getChannelData(i)[j] = (Math.random() * 2 - 1) * Math.pow(1 - j / length, 3);
+        }
+      }
+      reverbNode = audioCtx.createConvolver();
+      reverbNode.buffer = impulse;
+      const reverbGain = audioCtx.createGain();
+      reverbGain.gain.value = 0.25;
+
+      masterGain.connect(audioCtx.destination);
+      reverbNode.connect(reverbGain);
+      reverbGain.connect(masterGain);
+
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      audioEnabled = true;
+      startAmbient();
+      window.removeEventListener('pointerdown', initAudio);
+      window.removeEventListener('wheel', initAudio);
+      window.removeEventListener('touchstart', initAudio);
+      window.removeEventListener('keydown', initAudio);
+    }
+
+    function startAmbient() {
+      if (!audioEnabled || !audioCtx || ambientStarted) return;
+      ambientStarted = true;
+      const ambientBus = audioCtx.createGain();
+      ambientBus.gain.value = 0;
+      ambientBus.connect(masterGain);
+      ambientBus.connect(reverbNode);
+      const now = audioCtx.currentTime;
+      ambientBus.gain.linearRampToValueAtTime(1, now + 3.0);
+
+      const d1 = audioCtx.createOscillator(); const d1g = audioCtx.createGain();
+      d1.type = 'sine'; d1.frequency.value = 55; d1g.gain.value = 0.030;
+      d1.connect(d1g); d1g.connect(ambientBus); d1.start(now);
+
+      const d2 = audioCtx.createOscillator(); const d2g = audioCtx.createGain();
+      d2.type = 'sine'; d2.frequency.value = 82.5; d2g.gain.value = 0.020;
+      d2.connect(d2g); d2g.connect(ambientBus); d2.start(now);
+
+      const d3 = audioCtx.createOscillator(); const d3g = audioCtx.createGain();
+      d3.type = 'sine'; d3.frequency.value = 110; d3g.gain.value = 0.012;
+      const lfo = audioCtx.createOscillator(); const lfoGain = audioCtx.createGain();
+      lfo.frequency.value = 0.07; lfoGain.gain.value = 0.008;
+      lfo.connect(lfoGain); lfoGain.connect(d3g.gain); lfo.start(now);
+      d3.connect(d3g); d3g.connect(ambientBus); d3.start(now);
+
+      const sr = audioCtx.sampleRate;
+      const bufLen = sr * 6;
+      const buf = audioCtx.createBuffer(1, bufLen, sr);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
+
+      const air = audioCtx.createBufferSource(); air.buffer = buf; air.loop = true;
+      const airFilter = audioCtx.createBiquadFilter();
+      airFilter.type = 'bandpass'; airFilter.frequency.value = 1200; airFilter.Q.value = 0.4;
+      const airGain = audioCtx.createGain(); airGain.gain.value = 0.004;
+      air.connect(airFilter); airFilter.connect(airGain); airGain.connect(ambientBus);
+      air.start(now);
+    }
+
+    window.addEventListener('pointerdown', initAudio);
+    window.addEventListener('wheel', initAudio, { passive: true });
+    window.addEventListener('touchstart', initAudio, { passive: true });
+    window.addEventListener('keydown', initAudio);
+
+    function tone(freq, duration, type = 'sine', volume = 0.06, useReverb = true) {
+      if (!audioEnabled || !audioCtx) return;
+      const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+      osc.type = type; osc.frequency.value = freq;
+      osc.connect(gain); gain.connect(masterGain);
+      if (useReverb) gain.connect(reverbNode);
+      const now = audioCtx.currentTime;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(volume, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      osc.start(now); osc.stop(now + duration + 0.1);
+    }
+
+    function noise(duration, filterFreq, q = 0.8, volume = 0.04) {
+      if (!audioEnabled || !audioCtx) return;
+      const sr = audioCtx.sampleRate;
+      const buffer = audioCtx.createBuffer(1, sr * duration, sr);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+      const src = audioCtx.createBufferSource(); src.buffer = buffer;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass'; filter.frequency.value = filterFreq; filter.Q.value = q;
+      const gain = audioCtx.createGain();
+      src.connect(filter); filter.connect(gain); gain.connect(masterGain);
+      const now = audioCtx.currentTime;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(volume, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      src.start(now); src.stop(now + duration + 0.1);
+    }
+
+    function whoosh(duration, volume, fromFreq, toFreq) {
+      if (!audioEnabled || !audioCtx) return;
+      const sr = audioCtx.sampleRate;
+      const buffer = audioCtx.createBuffer(1, sr * duration, sr);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+      const now = audioCtx.currentTime;
+      const isFalling = toFreq < fromFreq;
+
+      const src = audioCtx.createBufferSource(); src.buffer = buffer;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass'; filter.Q.value = 2.0;
+      const gain = audioCtx.createGain();
+      src.connect(filter); filter.connect(gain); gain.connect(masterGain);
+      gain.connect(reverbNode);
+      filter.frequency.setValueAtTime(fromFreq, now);
+      filter.frequency.exponentialRampToValueAtTime(toFreq, now + duration);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(volume, now + duration * 0.4);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      src.start(now); src.stop(now + duration + 0.1);
+
+      const sub = audioCtx.createOscillator(); const subGain = audioCtx.createGain();
+      sub.type = 'sine';
+      sub.frequency.setValueAtTime(isFalling ? 72 : 42, now);
+      sub.frequency.exponentialRampToValueAtTime(isFalling ? 42 : 72, now + duration);
+      subGain.gain.setValueAtTime(0, now);
+      subGain.gain.linearRampToValueAtTime(volume * 2.4, now + 0.06);
+      subGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      sub.connect(subGain); subGain.connect(masterGain);
+      sub.start(now); sub.stop(now + duration + 0.1);
+
+      const shimmer = audioCtx.createOscillator(); const shimGain = audioCtx.createGain();
+      shimmer.type = 'triangle';
+      shimmer.frequency.setValueAtTime(isFalling ? 4200 : 1100, now);
+      shimmer.frequency.exponentialRampToValueAtTime(isFalling ? 1100 : 4200, now + duration);
+      shimGain.gain.setValueAtTime(0, now);
+      shimGain.gain.linearRampToValueAtTime(volume * 0.35, now + duration * 0.5);
+      shimGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      shimmer.connect(shimGain); shimGain.connect(reverbNode);
+      shimmer.start(now); shimmer.stop(now + duration + 0.1);
+
+      noise(0.15, 3500, 1.5, volume * 0.4);
+    }
+
+    function sfxImpact(vol = 0.15, duration = 0.9) {
+      if (!audioEnabled || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      const boom = audioCtx.createOscillator(); const boomGain = audioCtx.createGain();
+      boom.type = 'sine';
+      boom.frequency.setValueAtTime(88, now);
+      boom.frequency.exponentialRampToValueAtTime(28, now + duration * 0.9);
+      boomGain.gain.setValueAtTime(0, now);
+      boomGain.gain.linearRampToValueAtTime(vol, now + 0.025);
+      boomGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+      boom.connect(boomGain); boomGain.connect(masterGain); boomGain.connect(reverbNode);
+      boom.start(now); boom.stop(now + duration + 0.1);
+      noise(0.07, 1300, 0.7, vol * 0.5);
+      noise(0.7, 4500, 0.9, vol * 0.2);
+    }
+
+    function sfxRiser(duration = 1.4, vol = 0.07) {
+      if (!audioEnabled || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      const sr = audioCtx.sampleRate;
+      const buffer = audioCtx.createBuffer(1, sr * duration, sr);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+      const src = audioCtx.createBufferSource(); src.buffer = buffer;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass'; filter.Q.value = 4;
+      filter.frequency.setValueAtTime(220, now);
+      filter.frequency.exponentialRampToValueAtTime(7800, now + duration);
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(vol, now + duration * 0.85);
+      gain.gain.linearRampToValueAtTime(0, now + duration);
+      src.connect(filter); filter.connect(gain);
+      gain.connect(masterGain); gain.connect(reverbNode);
+      src.start(now); src.stop(now + duration + 0.1);
+
+      const osc = audioCtx.createOscillator(); const oscGain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(110, now);
+      osc.frequency.exponentialRampToValueAtTime(660, now + duration);
+      oscGain.gain.setValueAtTime(0, now);
+      oscGain.gain.linearRampToValueAtTime(vol * 0.4, now + duration * 0.85);
+      oscGain.gain.linearRampToValueAtTime(0, now + duration);
+      osc.connect(oscGain); oscGain.connect(masterGain); oscGain.connect(reverbNode);
+      osc.start(now); osc.stop(now + duration + 0.1);
+    }
+
+    function sfxType() { noise(0.03, 1800 + Math.random() * 600, 3.0, 0.02); }
+    function sfxSend() { tone(600, 0.1, 'triangle', 0.1); tone(900, 0.08, 'sine', 0.05); noise(0.05, 2000, 1.0, 0.04); }
+    function sfxBell(freq, vol = 0.05) { tone(freq, 0.6, 'sine', vol); tone(freq * 2.01, 0.4, 'sine', vol * 0.4); tone(freq * 3.02, 0.2, 'sine', vol * 0.2); }
+    function sfxChord() {
+      const base = 261.63;
+      tone(base, 1.5, 'sine', 0.04); tone(base * 1.25, 1.5, 'sine', 0.03);
+      tone(base * 1.5, 1.5, 'sine', 0.03); tone(base * 1.875, 1.5, 'sine', 0.02);
+    }
+    function sfxShimmer() { tone(2400, 0.8, 'triangle', 0.03); tone(3600, 0.6, 'sine', 0.02); }
+
+    /* ===== DYNAMIC LENGTHS ===== */
+    const typedText = document.getElementById('typedText');
+    const responseText = document.getElementById('responseText');
+    const TYPED_LEN = (typedText.textContent || '').trim().length || 40;
+    const RESPONSE_LEN = (responseText.textContent || '').trim().length || 90;
+    const typedStepsCount = Math.max(20, Math.round(TYPED_LEN * (IS_RTL ? 0.85 : 1)));
+    const responseStepsCount = Math.max(40, Math.round(RESPONSE_LEN * (IS_RTL ? 0.6 : 0.7)));
+
+    const clipStart = IS_RTL ? "inset(0 0% 0 100%)" : "inset(0 100% 0 0)";
+    const clipEnd   = "inset(0 0% 0 0)";
+
+    /* ===== INITIAL STATES ===== */
+    gsap.set("#world", { xPercent: -33.3333, yPercent: -66.6667 });
+    gsap.set("#brandCircle", { scale: 0.5, opacity: 0 });
+    gsap.set("#amirText span, #rahbariText span", { y: 20, opacity: 0 });
+    gsap.set("#subtextBlock", { x: -10, opacity: 0 });
+    gsap.set("#userBubble", { y: 20, scale: 0.9, opacity: 0 });
+    gsap.set("#assistantBubble", { y: 20, opacity: 0 });
+    gsap.set("#typingDots", { opacity: 0 });
+    gsap.set("#responseText", { clipPath: clipStart });
+    gsap.set("#typedText", { clipPath: clipStart });
+    gsap.set(".promo-mark", { scale: 0.5, opacity: 0 });
+    gsap.set(".promo-kicker", { y: 10, opacity: 0 });
+    gsap.set(".promo-headline", { y: 30, scale: 0.95, opacity: 0 });
+    gsap.set(".promo-sub", { y: 15, opacity: 0 });
+    gsap.set(".promo-cta", { y: 20, scale: 0.9, opacity: 0 });
+    gsap.set("#quoteText", { opacity: 0, y: 30 });
+    gsap.set(".philosophy .quote-mark", { opacity: 0, y: 10 });
+    gsap.set(".philosophy .attribution", { opacity: 0, y: 10 });
+    gsap.set(".step-card", { xPercent: -120, opacity: 0 });
+    gsap.set(".step", { y: 30, opacity: 0 });
+    gsap.set(".swatch", { scale: 0.6, opacity: 0 });
+    gsap.set(".type-specimen", { y: 15, opacity: 0 });
+
+    let isLocked = false;
+    let isUnlocked = false;
+    let isAnimating = false;
+    let lockProgress = 0.45;
+
+    const sendBtn = document.getElementById('sendBtn');
+    const clickHint = document.getElementById('clickHint');
+
+    function setLockedState(locked) {
+      if (locked === isLocked) return;
+      isLocked = locked;
+      if (locked) {
+        clickHint.classList.add('active');
+        sendBtn.classList.add('pulsing');
+      } else {
+        clickHint.classList.remove('active');
+        sendBtn.classList.remove('pulsing');
+      }
+    }
+
+    /* ===== MAIN TIMELINE ===== */
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".scroll-container",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5,
+        onUpdate: (self) => {
+          if (isUnlocked || isAnimating) return;
+          if (self.progress >= lockProgress - 0.02) setLockedState(true);
+          else setLockedState(false);
+          if (self.progress > lockProgress + 0.001) window.scrollTo(0, lockProgress * self.end);
+        }
+      }
+    });
+
+    /* SCENE 1: LOGO */
+    tl.call(() => sfxImpact(0.08, 0.7), null, 0);
+    tl.call(() => sfxBell(880, 0.05), null, 0);
+    tl.to("#brandCircle", { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }, 0);
+    tl.call(() => sfxBell(440, 0.03), null, 0.2);
+    tl.to("#amirText span:nth-child(1)", { y: 0, opacity: 1, duration: 0.3 }, 0.2);
+    tl.call(() => sfxBell(494, 0.03), null, 0.3);
+    tl.to("#amirText span:nth-child(2)", { y: 0, opacity: 1, duration: 0.3 }, 0.3);
+    tl.call(() => sfxBell(523, 0.03), null, 0.4);
+    tl.to("#amirText span:nth-child(3)", { y: 0, opacity: 1, duration: 0.3 }, 0.4);
+    tl.call(() => sfxBell(587, 0.03), null, 0.5);
+    tl.to("#amirText span:nth-child(4)", { y: 0, opacity: 1, duration: 0.3 }, 0.5);
+    tl.call(() => noise(0.4, 1200, 1.0, 0.04), null, 0.6);
+    tl.to("#subtextBlock", { x: 0, opacity: 1, duration: 0.4 }, 0.6);
+    tl.call(() => sfxBell(659, 0.03), null, 0.7);
+    tl.to("#rahbariText span:nth-child(1)", { y: 0, opacity: 1, duration: 0.3 }, 0.7);
+    tl.call(() => sfxBell(698, 0.03), null, 0.8);
+    tl.to("#rahbariText span:nth-child(2)", { y: 0, opacity: 1, duration: 0.3 }, 0.8);
+    tl.call(() => sfxBell(784, 0.03), null, 0.9);
+    tl.to("#rahbariText span:nth-child(3)", { y: 0, opacity: 1, duration: 0.3 }, 0.9);
+    tl.call(() => sfxBell(880, 0.03), null, 1.0);
+    tl.to("#rahbariText span:nth-child(4)", { y: 0, opacity: 1, duration: 0.3 }, 1.0);
+    tl.call(() => sfxBell(988, 0.03), null, 1.1);
+    tl.to("#rahbariText span:nth-child(5)", { y: 0, opacity: 1, duration: 0.3 }, 1.1);
+    tl.call(() => sfxBell(1046.5, 0.03), null, 1.2);
+    tl.to("#rahbariText span:nth-child(6)", { y: 0, opacity: 1, duration: 0.3 }, 1.2);
+    tl.call(() => sfxBell(1174, 0.03), null, 1.3);
+    tl.to("#rahbariText span:nth-child(7)", { y: 0, opacity: 1, duration: 0.3 }, 1.3);
+    tl.to({}, { duration: 1.2 });
+
+    /* SCENE 2: CHAT — FIX #1 applied */
+    tl.call(() => sfxRiser(0.9, 0.05), null, 2.5);
+    tl.call(() => whoosh(1.2, 0.10, 1400, 200), null, 3.3);
+    tl.to("#world", { xPercent: IS_RTL ? -66.6667 : 0, duration: 1.4, ease: "power2.inOut" }, 3.3);
+    tl.call(() => sfxImpact(0.11, 0.6), null, 4.4);
+
+    tl.call(() => sfxType(), null, 4.7);
+    tl.to("#placeholder", { opacity: 0, duration: 0.2 }, 4.7);
+    for(let i=0; i<15; i++) tl.call(() => sfxType(), null, 4.9 + (i * 0.1));
+    tl.to("#typedText", { clipPath: clipEnd, duration: 1.5, ease: `steps(${typedStepsCount})` }, 4.9);
+
+    tl.to({}, { duration: 5.5 }, 6.4);
+
+    /* SCENE 3: PHILOSOPHY */
+    tl.call(() => sfxRiser(1.1, 0.06), null, 11.4);
+    tl.call(() => whoosh(1.3, 0.11, 400, 2200), null, 12.2);
+    tl.to("#world", { yPercent: -33.3333, duration: 1.4, ease: "power2.inOut" }, 12.2);
+    tl.call(() => sfxType(), null, 13.4);
+    tl.to("#quoteText", { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 13.4);
+    tl.call(() => sfxBell(523.25, 0.04), null, 13.7);
+    tl.to(".philosophy .quote-mark", { opacity: 0.35, y: 0, duration: 0.5 }, 13.7);
+    tl.to(".philosophy .attribution", { opacity: 1, y: 0, duration: 0.5 }, 14.1);
+    tl.to({}, { duration: 1.2 });
+
+    /* SCENE 4: WORK STEPS */
+    tl.call(() => sfxRiser(0.9, 0.05), null, 15.8);
+    tl.call(() => whoosh(1.2, 0.10, 300, 1800), null, 16.5);
+    tl.to("#world", { xPercent: -33.3333, duration: 1.4, ease: "power2.inOut" }, 16.5);
+
+    const stepCards = document.querySelectorAll('.step-card');
+    const cardStartTime = 17.6;
+    const cardInterval = 0.9;
+    stepCards.forEach((card, i) => {
+      const t = cardStartTime + i * cardInterval;
+      tl.to(card, { xPercent: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, t);
+      tl.call(() => whoosh(0.35, 0.03, 2000, 600), null, t + 0.1);
+      tl.call(() => sfxType(), null, t + 0.2);
+    });
+    tl.call(() => sfxBell(783.99, 0.04), null, cardStartTime + 8 * cardInterval + 0.3);
+    tl.call(() => sfxBell(987.77, 0.04), null, cardStartTime + 8 * cardInterval + 0.5);
+    tl.to({}, { duration: 1.0 });
+
+    /* SCENE 5: PROCESS */
+    tl.call(() => sfxRiser(1.2, 0.07), null, 26.0);
+    tl.call(() => whoosh(1.3, 0.11, 300, 2400), null, 26.8);
+    tl.to("#world", { yPercent: 0, duration: 1.4, ease: "power2.inOut" }, 26.8);
+    tl.call(() => sfxImpact(0.13, 0.7), null, 28.0);
+    tl.to(".step", { y: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: "back.out(1.4)" }, 28.1);
+    tl.call(() => sfxBell(523.25, 0.04), null, 28.2);
+    tl.call(() => sfxBell(659.25, 0.04), null, 28.5);
+    tl.call(() => sfxBell(783.99, 0.04), null, 28.8);
+    tl.to({}, { duration: 1.0 });
+
+    /* SCENE 6: COLORS — FIX #2 applied */
+    tl.call(() => sfxRiser(0.9, 0.05), null, 30.3);
+    tl.call(() => whoosh(1.2, 0.10, 500, 2400), null, 31.0);
+    tl.to("#world", { xPercent: IS_RTL ? 0 : -66.6667, duration: 1.4, ease: "power2.inOut" }, 31.0);
+    tl.to(".swatch", { scale: 1, opacity: 1, duration: 0.45, stagger: 0.08, ease: "back.out(1.6)" }, 32.1);
+    tl.call(() => sfxShimmer(), null, 32.3);
+    tl.to(".type-specimen", { y: 0, opacity: 1, duration: 0.5, stagger: 0.1 }, 32.5);
+    tl.to({}, { duration: 1.0 });
+
+    /* SCENE 7: PROMO */
+    tl.call(() => sfxRiser(1.3, 0.08), null, 34.5);
+    tl.call(() => whoosh(1.5, 0.13, 180, 3000), null, 35.3);
+    tl.to("#world", { yPercent: -33.3333, duration: 1.5, ease: "power2.inOut" }, 35.3);
+    tl.call(() => sfxImpact(0.20, 1.0), null, 36.7);
+    tl.call(() => sfxBell(523.25, 0.06), null, 36.8);
+    tl.to(".promo-mark", { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }, 36.8);
+    tl.to(".promo-kicker", { y: 0, opacity: 1, duration: 0.5 }, 37.0);
+    tl.call(() => sfxChord(), null, 37.3);
+    tl.to(".promo-headline", { y: 0, scale: 1, opacity: 1, duration: 0.6, ease: "power2.out" }, 37.3);
+    tl.to(".promo-sub", { y: 0, opacity: 1, duration: 0.5 }, 37.6);
+    tl.call(() => sfxBell(783.99, 0.05), null, 37.9);
+    tl.to(".promo-cta", { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)" }, 37.9);
+    tl.to({}, { duration: 1.0 });
+
+    lockProgress = 6.4 / tl.duration();
+
+    /* ===== CHAT TIMELINE ===== */
+    const chatTl = gsap.timeline({
+      paused: true,
+      onComplete: () => {
+        isAnimating = false;
+        isUnlocked = true;
+        setLockedState(false);
+        if (navigator.vibrate) navigator.vibrate([10, 30, 15]);
+      }
+    });
+
+    chatTl
+      .call(() => {
+        sfxSend();
+        whoosh(0.65, 0.09, 700, 2600);
+        sfxImpact(0.10, 0.5);
+      })
+      .to(sendBtn, { scale: 0.86, duration: 0.1 })
+      .to(sendBtn, { scale: 1, duration: 0.2 })
+      .to("#typedText", { opacity: 0, duration: 0.1 })
+      .to("#userBubble", { y: 0, scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" })
+      .to("#userBubble", { y: -70, duration: 0.4, ease: "power2.out" }, "+=0.2")
+      .to("#assistantBubble", { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, "<")
+      .to("#typingDots", { opacity: 1, duration: 0.2 }, "<")
+      .call(sfxType, null, "+=0.3")
+      .call(sfxType, null, "+=0.3")
+      .to("#typingDots", { opacity: 0, duration: 0.2 })
+      .call(() => sfxBell(440, 0.03))
+      .to("#responseText", { clipPath: clipEnd, duration: 1.8, ease: `steps(${responseStepsCount})` });
+
+    function triggerSend() {
+      if (isUnlocked || isAnimating) return;
+      isAnimating = true;
+      clickHint.classList.remove('active');
+      sendBtn.classList.remove('pulsing');
+      if (navigator.vibrate) navigator.vibrate(12);
+      chatTl.play(0);
+    }
+
+    sendBtn.addEventListener('click', triggerSend);
+    sendBtn.addEventListener('touchstart', (e) => {
+      if (!isUnlocked && !isAnimating) sendBtn.style.transform = 'scale(0.92)';
+    }, { passive: true });
+    sendBtn.addEventListener('touchend', () => { sendBtn.style.transform = ''; }, { passive: true });
+
+    /* ===== HARD SCROLL LOCK ===== */
+    document.addEventListener('wheel', (e) => {
+      if (isLocked && !isUnlocked) e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isLocked || isUnlocked) return;
+      if (e.target.closest('button, a, .send, .promo-cta, .lang-toggle')) return;
+      e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('keydown', (e) => {
+      if (!isLocked || isUnlocked) return;
+      const blocked = ['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'End', 'Home', ' ', 'Spacebar'];
+      if (blocked.includes(e.key)) e.preventDefault();
+    });
+
+    window.addEventListener('scroll', () => {
+      if (!isLocked || isUnlocked || isAnimating) return;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const lockY = lockProgress * maxScroll;
+      if (Math.abs(window.scrollY - lockY) > 2) window.scrollTo(0, lockY);
+    }, { passive: true });
+
+    ScrollTrigger.create({
+      trigger: ".scroll-container",
+      start: "top top",
+      onUpdate: (self) => {
+        const hint = document.getElementById('scrollHint');
+        hint.style.opacity = self.progress > 0.02 ? '0' : '1';
+      }
+    });
+
+    window.addEventListener("resize", () => { ScrollTrigger.refresh(); });
+  </script>
+</body>
+</html>
